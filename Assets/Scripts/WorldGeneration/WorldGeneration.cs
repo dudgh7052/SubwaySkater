@@ -59,13 +59,13 @@ public class WorldGeneration : MonoBehaviour
 
     void SpawnNewChuck()
     {
-        // Get a random index for which prefab to spawn
+        // 랜덤한 인덱스 뽑기
         int _randomIndex = Random.Range(0, m_chunkPrefab.Count);
 
-        // Does it already exist within our pool
-        Chunk _chunk = null;
+        // 청크 풀에서 활성화가 안되있거나 청크 프리팹리스트에서 이름이 같은 것만 넣어준다.
+        Chunk _chunk = m_chunkPool.Find(x => !x.gameObject.activeSelf && x.name == m_chunkPrefab[_randomIndex].name + "(Clone)");
 
-        // Create a chunk, if were not able to find one to reuse
+        // 풀에서 가져올 청크가 없을 경우
         if (!_chunk)
         {
             GameObject _go = Instantiate(m_chunkPrefab[_randomIndex], transform);
@@ -73,11 +73,11 @@ public class WorldGeneration : MonoBehaviour
         }
 
         // Place the object, and show it
-        _chunk.transform.position = new Vector3(0, 0, m_chunkSpawnZ);
-        m_chunkSpawnZ += _chunk.m_chunkLength;
+        _chunk.transform.position = new Vector3(0, 0, m_chunkSpawnZ); // 현재 생성해야하는 청크 위치 설정
+        m_chunkSpawnZ += _chunk.m_chunkLength; // 청크 스크립트에서 길이 가져오기
 
         // Store the value, to reuse in our pool
-        m_activeChunks.Enqueue(_chunk);
+        m_activeChunks.Enqueue(_chunk); // 활성화 청크 넣기
         _chunk.ShowChunk();
     }
 
