@@ -30,7 +30,7 @@ public class InputManager : MonoBehaviour
             SetupControl();
             DontDestroyOnLoad(gameObject);
         }
-        Destroy(gameObject);
+        else Destroy(gameObject);
     }
 
     void LateUpdate()
@@ -95,12 +95,12 @@ public class InputManager : MonoBehaviour
         m_startDrag = Vector2.zero;
     }
 
-    private void OnEnable()
+    void OnEnable()
     {
         m_actionScheme.Enable();
     }
 
-    private void OnDisable()
+    void OnDisable()
     {
         m_actionScheme.Disable();
     }
