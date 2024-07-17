@@ -15,6 +15,7 @@ public class RunningState : BaseState
         if (InputManager.Instance.IsSwipeRight) m_motor.ChangeLane(1); // 오른쪽 이동
         if (InputManager.Instance.IsSwipeUp && m_motor.m_isGrounded) m_motor.ChangeState(GetComponent<JumpingState>()); // 점프
         if (!m_motor.m_isGrounded) m_motor.ChangeState(GetComponent<FallingState>());
+        if (InputManager.Instance.IsSwipeDown) m_motor.ChangeState(GetComponent<SlidingState>()); // 슬라이딩
     }
 
     public override Vector3 ProcessMotion()

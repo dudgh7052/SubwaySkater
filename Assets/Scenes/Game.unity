@@ -993,7 +993,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1277544491}
   m_Layer: 0
-  m_Name: -----Manager-----
+  m_Name: --- Manager ---
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1205,7 +1205,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1663509517}
   m_Layer: 0
-  m_Name: -----Enviromet-----
+  m_Name: --- Enviromet ---
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1344,6 +1344,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59b4620cf60448e47b3e9cfc3236bb18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1945893118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1945893107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75b9018f0c07d434abd58ad72ec34233, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_sliderDuration: 1
 --- !u!1001 &2007762183
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1432,6 +1445,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 100068, guid: 095f379f461e4554c8999ccdc9f2e131,
         type: 3}
       insertIndex: -1
+      addedObject: {fileID: 1945893111}
+    - targetCorrespondingSourceObject: {fileID: 100068, guid: 095f379f461e4554c8999ccdc9f2e131,
+        type: 3}
+      insertIndex: -1
       addedObject: {fileID: 1945893113}
     - targetCorrespondingSourceObject: {fileID: 100068, guid: 095f379f461e4554c8999ccdc9f2e131,
         type: 3}
@@ -1440,11 +1457,11 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 100068, guid: 095f379f461e4554c8999ccdc9f2e131,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1945893117}
+      addedObject: {fileID: 1945893118}
     - targetCorrespondingSourceObject: {fileID: 100068, guid: 095f379f461e4554c8999ccdc9f2e131,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1945893111}
+      addedObject: {fileID: 1945893117}
   m_SourcePrefab: {fileID: 100100000, guid: 095f379f461e4554c8999ccdc9f2e131, type: 3}
 --- !u!1 &2021127842
 GameObject:
