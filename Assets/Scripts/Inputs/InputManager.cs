@@ -87,8 +87,8 @@ public class InputManager : MonoBehaviour
             }
             else // À§, ¾Æ·¡
             {
-                if (_delta.y < 0) IsSwipeUp = true;
-                else IsSwipeDown = true;
+                if (_delta.y < 0) IsSwipeDown = true;
+                else IsSwipeUp = true;
             }
         }
 

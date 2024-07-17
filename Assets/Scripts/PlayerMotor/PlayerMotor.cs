@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMotor : MonoBehaviour
 {
     [HideInInspector] public Vector3 m_moveVector;
-    [HideInInspector] public Vector3 m_verticalVelocity;
+    [HideInInspector] public float m_verticalVelocity;
     [HideInInspector] public bool m_isGrounded;
     [HideInInspector] public int m_currentLane;
 
@@ -13,7 +13,7 @@ public class PlayerMotor : MonoBehaviour
     public float m_baseRunSpeed = 5.0f;
     public float m_gravity = 14.0f;
     public float m_baseSidewaySpeed = 10.0f;
-    public float m_terminalVelocity = 20.0f;
+    public float m_terminalVelocity = 20.0f; // 최대 중력
 
     public CharacterController m_controller;
 
@@ -46,6 +46,10 @@ public class PlayerMotor : MonoBehaviour
         m_controller.Move(m_moveVector * Time.deltaTime);
     }
 
+    /// <summary>
+    /// 플레이어 캐릭터 x 조정
+    /// </summary>
+    /// <returns>이동 값</returns>
     public float SnapToLane()
     {
         float _r = 0.0f; // 리턴 할 값
@@ -75,9 +79,19 @@ public class PlayerMotor : MonoBehaviour
         return _r;
     }
 
+    /// <summary>
+    /// 레인 이동
+    /// </summary>
+    /// <param name="argDir">이동 할 레인</param>
     public void ChangeLane(int argDir)
     {
         m_currentLane = Mathf.Clamp(m_currentLane + argDir, -1, 1); // 범위 제한
+    }
+
+    public void ApplyGravity()
+    {
+        m_verticalVelocity -= m_gravity * Time.deltaTime;
+        if (m_verticalVelocity < -m_terminalVelocity) m_verticalVelocity = -m_terminalVelocity;
     }
 
     public void ChangeState(BaseState argState)
