@@ -16,12 +16,15 @@ public class PlayerMotor : MonoBehaviour
     public float m_terminalVelocity = 20.0f; // 최대 중력
 
     public CharacterController m_controller;
+    public Animator m_animator;
 
     BaseState m_state;
 
     void Start()
     {
         m_controller = GetComponent<CharacterController>();
+        m_animator = GetComponent<Animator>();
+
         m_state = GetComponent<RunningState>();
         m_state.Enter();
     }
@@ -41,6 +44,11 @@ public class PlayerMotor : MonoBehaviour
 
         // 상태 전환 체크
         m_state.Tick();
+
+        // 애니메이터 값 조정
+        m_animator?.SetBool("IsGrounded", m_isGrounded);
+        m_animator?.SetFloat("Speed", Mathf.Abs(m_moveVector.z));
+        
 
         // 플레이어 이동
         m_controller.Move(m_moveVector * Time.deltaTime);

@@ -11,6 +11,7 @@ public class JumpingState : BaseState
     public override void Enter()
     {
         m_motor.m_verticalVelocity = m_jumpForce;
+        m_motor.m_animator?.SetTrigger("Jump");
     }
 
     public override void Tick()

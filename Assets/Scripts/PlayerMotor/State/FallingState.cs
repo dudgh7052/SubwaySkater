@@ -2,6 +2,11 @@ using UnityEngine;
 
 public class FallingState : BaseState
 {
+    public override void Enter()
+    {
+        m_motor.m_animator?.SetTrigger("Fall");
+    }
+
     public override void Tick()
     {
         // ¶¥ ¹âÀ» ½Ã ·¯´×»óÅÂ·Î

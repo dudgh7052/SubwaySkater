@@ -424,7 +424,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_firstChuckSpawnPosition: 5
-  m_chunkOnScreen: 7
+  m_chunkOnScreen: 8
   m_despawnDistance: 5
   m_chunkPrefab:
   - {fileID: 5645914661971529182, guid: fa5c64c2c326aed498f4ffb5d1bfeb3a, type: 3}
@@ -1242,7 +1242,7 @@ Animator:
   m_GameObject: {fileID: 1945893107}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e67aad0c280ccb342b2f89a68839b0c7, type: 2}
+  m_Controller: {fileID: 9100000, guid: 472f50cd643e00041be461724024412e, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1275,6 +1275,7 @@ MonoBehaviour:
   m_baseSidewaySpeed: 10
   m_terminalVelocity: 20
   m_controller: {fileID: 0}
+  m_animator: {fileID: 0}
 --- !u!143 &1945893112
 CharacterController:
   m_ObjectHideFlags: 0

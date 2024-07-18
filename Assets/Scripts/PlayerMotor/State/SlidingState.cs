@@ -11,6 +11,7 @@ public class SlidingState : BaseState
 
     public override void Enter()
     {
+        m_motor.m_animator?.SetTrigger("Slide");
         m_slideStart = Time.time;
 
         m_initialSize = m_motor.m_controller.height;
@@ -35,6 +36,7 @@ public class SlidingState : BaseState
 
     public override void Exit()
     {
+        m_motor.m_animator?.SetTrigger("Running");
         m_motor.m_controller.center = m_initialCenter;
         m_motor.m_controller.height = m_initialSize;
     }
