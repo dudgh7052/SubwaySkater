@@ -19,6 +19,7 @@ public class PlayerMotor : MonoBehaviour
     public Animator m_animator;
 
     BaseState m_state;
+    bool m_isPause = false;
 
     void Start()
     {
@@ -27,10 +28,14 @@ public class PlayerMotor : MonoBehaviour
 
         m_state = GetComponent<RunningState>();
         m_state.Enter();
+
+        m_isPause = true;
     }
 
     void Update()
     {
+        if (m_isPause) return;
+
         UpdateMotor();
     }
 
@@ -107,5 +112,15 @@ public class PlayerMotor : MonoBehaviour
         m_state.Exit();
         m_state = argState;
         m_state.Enter();
+    }
+
+    public void PausePlayer()
+    {
+        m_isPause = true;
+    }
+
+    public void ResumePlayer()
+    {
+        m_isPause = false;
     }
 }

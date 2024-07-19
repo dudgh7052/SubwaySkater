@@ -6,6 +6,7 @@ public class RunningState : BaseState
 {
     public override void Enter()
     {
+        m_motor.m_animator?.SetBool("Running", true);
         m_motor.m_verticalVelocity = 0.0f;
     }
 
@@ -16,6 +17,11 @@ public class RunningState : BaseState
         if (InputManager.Instance.IsSwipeUp && m_motor.m_isGrounded) m_motor.ChangeState(GetComponent<JumpingState>()); // 점프
         if (!m_motor.m_isGrounded) m_motor.ChangeState(GetComponent<FallingState>());
         if (InputManager.Instance.IsSwipeDown) m_motor.ChangeState(GetComponent<SlidingState>()); // 슬라이딩
+    }
+
+    public override void Exit()
+    {
+        m_motor.m_animator?.SetBool("Running", false);
     }
 
     public override Vector3 ProcessMotion()

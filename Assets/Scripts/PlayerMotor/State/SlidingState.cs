@@ -26,17 +26,27 @@ public class SlidingState : BaseState
         if (InputManager.Instance.IsSwipeLeft) m_motor.ChangeLane(-1); // 왼쪽 이동
         if (InputManager.Instance.IsSwipeRight) m_motor.ChangeLane(1); // 오른쪽 이동
 
-        if (!m_motor.m_isGrounded) m_motor.ChangeState(GetComponent<FallingState>());
+        if (!m_motor.m_isGrounded) 
+        {
+            m_motor.ChangeState(GetComponent<FallingState>());
+        }
 
-        if (InputManager.Instance.IsSwipeUp) m_motor.ChangeState(GetComponent<JumpingState>());
+
+        if (InputManager.Instance.IsSwipeUp) 
+        {
+            m_motor.ChangeState(GetComponent<JumpingState>());
+        }
+
 
         // 현재 시간 - 슬라이딩 시작시간이 슬라이딩 가능시간보다 클 경우
-        if (Time.time - m_slideStart > m_sliderDuration) m_motor.ChangeState(GetComponent<RunningState>());
+        if (Time.time - m_slideStart > m_sliderDuration) 
+        {
+            m_motor.ChangeState(GetComponent<RunningState>());
+        }
     }
 
     public override void Exit()
     {
-        m_motor.m_animator?.SetTrigger("Running");
         m_motor.m_controller.center = m_initialCenter;
         m_motor.m_controller.height = m_initialSize;
     }
