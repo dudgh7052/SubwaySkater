@@ -123,4 +123,16 @@ public class PlayerMotor : MonoBehaviour
     {
         m_isPause = false;
     }
+
+    public void RespawnPlayer()
+    {
+        ChangeState(GetComponent<RespawnState>());
+    }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        string _hitLayerName = LayerMask.LayerToName(hit.gameObject.layer);
+
+        if (_hitLayerName == "Death") ChangeState(GetComponent<DeathState>());
+    }
 }

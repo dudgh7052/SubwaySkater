@@ -11,7 +11,7 @@ public abstract class GameState : MonoBehaviour
 
     public virtual void Enter() 
     {
-
+        Debug.Log("Constructing : " + this.ToString());
     }
 
     public virtual void UpdateState()
