@@ -16,12 +16,13 @@ public class GameStateDeath : GameState
 
     public void ResumeGame()
     {
-        GameManager.Instance.IsMotor.RespawnPlayer();
         m_brain.ChangeState(GetComponent<GameStateGame>());
+        GameManager.Instance.IsMotor.RespawnPlayer();
     }
 
     public void ToMenu()
     {
         m_brain.ChangeState(GetComponent<GameStateInit>());
+        GameManager.Instance.IsMotor.transform.position = Vector3.zero;
     }
 }

@@ -127,6 +127,7 @@ public class PlayerMotor : MonoBehaviour
     public void RespawnPlayer()
     {
         ChangeState(GetComponent<RespawnState>());
+        GameManager.Instance.ChangeCamera(CameraType.Respawn);
     }
 
     private void OnControllerColliderHit(ControllerColliderHit hit)

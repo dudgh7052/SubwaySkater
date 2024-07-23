@@ -2,7 +2,7 @@ public class GameStateInit : GameState
 {
     public override void Enter()
     {
-        base.Enter();
+        GameManager.Instance.ChangeCamera(CameraType.Init);
     }
 
     public override void UpdateState()

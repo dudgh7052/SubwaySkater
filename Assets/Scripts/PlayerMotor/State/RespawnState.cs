@@ -32,6 +32,11 @@ public class RespawnState : BaseState
         if (InputManager.Instance.IsSwipeRight) m_motor.ChangeLane(1); // 오른쪽 이동
     }
 
+    public override void Exit()
+    {
+        GameManager.Instance.ChangeCamera(CameraType.Game);
+    }
+
     public override Vector3 ProcessMotion()
     {
         // 중력 적용

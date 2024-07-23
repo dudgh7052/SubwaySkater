@@ -37,7 +37,6 @@ public class SlidingState : BaseState
             m_motor.ChangeState(GetComponent<JumpingState>());
         }
 
-
         // 현재 시간 - 슬라이딩 시작시간이 슬라이딩 가능시간보다 클 경우
         if (Time.time - m_slideStart > m_sliderDuration) 
         {
