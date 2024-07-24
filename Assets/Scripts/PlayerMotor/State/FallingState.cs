@@ -14,6 +14,9 @@ public class FallingState : BaseState
         {
             m_motor.ChangeState(GetComponent<RunningState>());
         }
+
+        if (InputManager.Instance.IsSwipeLeft) m_motor.ChangeLane(-1); // 왼쪽 이동
+        if (InputManager.Instance.IsSwipeRight) m_motor.ChangeLane(1); // 오른쪽 이동
     }
 
     public override Vector3 ProcessMotion()
