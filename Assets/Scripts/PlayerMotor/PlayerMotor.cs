@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -124,6 +125,15 @@ public class PlayerMotor : MonoBehaviour
         m_isPause = false;
     }
 
+    public void ResetPlayer()
+    {
+        m_currentLane = 0;
+        transform.position = Vector3.zero;
+        m_animator?.SetTrigger("Idle");
+        ChangeState(GameManager.Instance.IsMotor.GetComponent<RunningState>());
+        PausePlayer();
+    }
+
     public void RespawnPlayer()
     {
         ChangeState(GetComponent<RespawnState>());
@@ -136,4 +146,6 @@ public class PlayerMotor : MonoBehaviour
 
         if (_hitLayerName == "Death") ChangeState(GetComponent<DeathState>());
     }
+
+    
 }

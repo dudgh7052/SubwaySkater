@@ -23,6 +23,8 @@ public class GameStateDeath : GameState
     public void ToMenu()
     {
         m_brain.ChangeState(GetComponent<GameStateInit>());
-        GameManager.Instance.IsMotor.transform.position = Vector3.zero;
+        GameManager.Instance.IsMotor.ResetPlayer();
+        GameManager.Instance.IsWorldGeneration.ResetWorld();
+        GameManager.Instance.IsSceneChunkGeneration.ResetWorld();
     }
 }

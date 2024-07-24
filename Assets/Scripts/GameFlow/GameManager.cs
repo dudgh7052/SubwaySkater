@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public enum CameraType
@@ -13,6 +14,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     [field: SerializeField] public PlayerMotor IsMotor { get; set; }
+    [field: SerializeField] public WorldGeneration IsWorldGeneration { get; set; }
+    [field: SerializeField] public SceneChunkGeneration IsSceneChunkGeneration { get; set; }
     public GameObject[] m_cameras;
 
     GameState m_state;

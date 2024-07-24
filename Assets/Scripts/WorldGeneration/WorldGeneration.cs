@@ -16,12 +16,10 @@ public class WorldGeneration : MonoBehaviour
     [SerializeField] List<GameObject> m_chunkPrefab;
     [SerializeField] Transform m_cameraTransform;
 
-    #region TO DELETE $$
     void Awake()
     {
         ResetWorld();
     }
-    #endregion
 
     void Start()
     {
@@ -40,12 +38,7 @@ public class WorldGeneration : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        ScanPosition();
-    }
-
-    void ScanPosition()
+    public void ScanPosition()
     {
         float _cameraZ = m_cameraTransform.position.z;
         Chunk _lastChunk = m_activeChunks.Peek();
