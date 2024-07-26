@@ -11,8 +11,8 @@ public class GameStateInit : GameState
     {
         GameManager.Instance.ChangeCamera(CameraType.Init);
 
-        m_hiscoreText.text = "Highscore : " + "TBD";
-        m_fishCountText.text = "Fish : " + "TBD";
+        m_hiscoreText.text = "Highscore: " + SaveManager.Instance.m_saveState.Highscore.ToString();
+        m_fishCountText.text = "Fish: " + SaveManager.Instance.m_saveState.Fish.ToString();
 
         m_menuUI.SetActive(true);
     }

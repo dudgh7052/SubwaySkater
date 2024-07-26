@@ -24,10 +24,22 @@ public class GameStateDeath : GameState
         m_deathUI.SetActive(true);
         m_completeionCircle.gameObject.SetActive(true);
 
-        m_highscoreText.text = "Highscore : TBD";
-        m_curScoreText.text = "12345";
-        m_totalFishText.text = "Total : TBD";
-        m_curFishText.text = "?x20";
+        // 필요하면 최고 점수 저장
+        if (SaveManager.Instance.m_saveState.Highscore < (int)GameStats.Instance.m_score)
+        {
+            SaveManager.Instance.m_saveState.Highscore = (int)GameStats.Instance.m_score;
+            m_curScoreText.color = Color.green;
+        }
+        else m_curScoreText.color = Color.white;
+
+        SaveManager.Instance.m_saveState.Fish += GameStats.Instance.m_fishCollectedThisSession;
+
+        SaveManager.Instance.Save();
+
+        m_highscoreText.text = "Highscore : " + SaveManager.Instance.m_saveState.Highscore;
+        m_curScoreText.text = GameStats.Instance.ScoreToText();
+        m_totalFishText.text = "Total : " + SaveManager.Instance.m_saveState.Fish;
+        m_curFishText.text = GameStats.Instance.FishToText();
     }
 
     public override void UpdateState()
@@ -56,6 +68,7 @@ public class GameStateDeath : GameState
     public void ToMenu()
     {
         m_brain.ChangeState(GetComponent<GameStateInit>());
+
         GameManager.Instance.IsMotor.ResetPlayer();
         GameManager.Instance.IsWorldGeneration.ResetWorld();
         GameManager.Instance.IsSceneChunkGeneration.ResetWorld();
