@@ -68,7 +68,7 @@ GameObject:
   - component: {fileID: 5999155029788260312}
   - component: {fileID: 3481506623085101622}
   m_Layer: 0
-  m_Name: Fish
+  m_Name: ViewObj
   m_TagString: Fish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

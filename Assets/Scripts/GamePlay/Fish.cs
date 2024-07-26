@@ -18,10 +18,16 @@ public class Fish : MonoBehaviour
 
     void PickupFish()
     {
-        m_animator.SetTrigger("Pickup");
+        m_animator?.SetTrigger("Pickup");
+        GameStats.Instance.CollectFish();
         // increment the fish count
         // increment the score
         // play sfx
         // trigger a animation
+    }
+
+    public void OnShowChunk()
+    {
+        m_animator?.SetTrigger("Idle");
     }
 }

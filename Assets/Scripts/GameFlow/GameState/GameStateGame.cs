@@ -12,6 +12,9 @@ public class GameStateGame : GameState
         GameManager.Instance.IsMotor.ResumePlayer();
         GameManager.Instance.ChangeCamera(CameraType.Game);
 
+        GameStats.Instance.OnCollectFish += OnCollectFish;
+        GameStats.Instance.OnScoreChange += OnScoreChange;
+
         m_fishCountText.text = "xTBD";
         m_scoreText.text = "TBD";
 
@@ -27,5 +30,18 @@ public class GameStateGame : GameState
     public override void Exit()
     {
         m_gameUI.SetActive(false);
+
+        GameStats.Instance.OnCollectFish -= OnCollectFish;
+        GameStats.Instance.OnScoreChange -= OnScoreChange;
+    }
+
+    void OnScoreChange(float argScore)
+    {
+        m_scoreText.text = GameStats.Instance.ScoreToText();
+    }
+
+    void OnCollectFish(int argFishCount)
+    {
+        m_fishCountText.text = GameStats.Instance.FishToText();
     }
 }
