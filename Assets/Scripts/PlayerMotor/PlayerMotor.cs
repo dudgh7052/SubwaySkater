@@ -115,16 +115,6 @@ public class PlayerMotor : MonoBehaviour
         m_state.Enter();
     }
 
-    public void PausePlayer()
-    {
-        m_isPause = true;
-    }
-
-    public void ResumePlayer()
-    {
-        m_isPause = false;
-    }
-
     public void ResetPlayer()
     {
         m_currentLane = 0;
@@ -147,5 +137,13 @@ public class PlayerMotor : MonoBehaviour
         if (_hitLayerName == "Death") ChangeState(GetComponent<DeathState>());
     }
 
-    
+    public void PausePlayer()
+    {
+        m_isPause = true;
+    }
+
+    public void ResumePlayer()
+    {
+        m_isPause = false;
+    }
 }

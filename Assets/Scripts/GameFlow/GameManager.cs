@@ -23,6 +23,10 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         Instance = this;
+    }
+
+    void Start()
+    {
         m_state = GetComponent<GameStateInit>();
         m_state.Enter();
     }

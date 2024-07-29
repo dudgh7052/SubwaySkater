@@ -15,9 +15,6 @@ public class GameStateGame : GameState
         GameStats.Instance.OnCollectFish += OnCollectFish;
         GameStats.Instance.OnScoreChange += OnScoreChange;
 
-        m_fishCountText.text = "xTBD";
-        m_scoreText.text = "TBD";
-
         m_gameUI.SetActive(true);
     }
 
