@@ -530,6 +530,12 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: 150, z: 0}
+--- !u!4 &210214726 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 400004, guid: 095f379f461e4554c8999ccdc9f2e131,
+    type: 3}
+  m_PrefabInstance: {fileID: 2007762183}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &292545994
 GameObject:
   m_ObjectHideFlags: 0
@@ -2067,6 +2073,7 @@ MonoBehaviour:
   m_shopUI: {fileID: 652704692}
   m_fishCountText: {fileID: 798735081}
   m_currentHatName: {fileID: 737984813}
+  m_hatLogic: {fileID: 1945893121}
   m_hatPrefab: {fileID: 2418876573813950404, guid: 3642ef9cc16e5114bb1e7fc2d4588131,
     type: 3}
   m_hatContainer: {fileID: 1509305289}
@@ -6457,6 +6464,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_verticalDistance: 25
   m_immunityTime: 1
+--- !u!114 &1945893121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1945893107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc3d9505f95ee9442a351df4ff51493b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_hatContainer: {fileID: 210214726}
 --- !u!1 &1951462217
 GameObject:
   m_ObjectHideFlags: 0
@@ -6721,6 +6741,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1945893120}
+    - targetCorrespondingSourceObject: {fileID: 100068, guid: 095f379f461e4554c8999ccdc9f2e131,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1945893121}
   m_SourcePrefab: {fileID: 100100000, guid: 095f379f461e4554c8999ccdc9f2e131, type: 3}
 --- !u!1 &2021127842
 GameObject:

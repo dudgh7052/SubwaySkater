@@ -7,6 +7,7 @@ public class GameStateShop : GameState
     public GameObject m_shopUI;
     public TextMeshProUGUI m_fishCountText;
     public TextMeshProUGUI m_currentHatName;
+    public HatLogic m_hatLogic;
 
     // Shop Item
     public GameObject m_hatPrefab;
@@ -52,8 +53,8 @@ public class GameStateShop : GameState
 
     void OnHatClick(int argIndex)
     {
-        Debug.Log("Hat was clicked!" + argIndex);
         m_currentHatName.text = m_hats[argIndex].m_itemName;
+        m_hatLogic.SelectHat(argIndex);
     }
 
     public void OnHomeClick()
