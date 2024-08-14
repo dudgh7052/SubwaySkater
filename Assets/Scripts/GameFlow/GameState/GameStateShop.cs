@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Android;
 using UnityEngine.UI;
 
 public class GameStateShop : GameState
@@ -8,25 +9,26 @@ public class GameStateShop : GameState
     public TextMeshProUGUI m_fishCountText;
     public TextMeshProUGUI m_currentHatName;
     public HatLogic m_hatLogic;
+    bool IsInit = false;
 
     // Shop Item
     public GameObject m_hatPrefab;
     public Transform m_hatContainer;
     Hat[] m_hats;
 
-    void Start()
-    {
-        m_hats = Resources.LoadAll<Hat>("Hat"); // 나중에 Addressable로 바꾸기
-        PopulateShop();
-    }
-
     public override void Enter()
     {
         GameManager.Instance.ChangeCamera(CameraType.Shop);
-
-        m_fishCountText.text = SaveManager.Instance.m_saveState.Fish.ToString("000");
-
+        m_hats = Resources.LoadAll<Hat>("Hat"); // 나중에 Addressable로 바꾸기
         m_shopUI.SetActive(true);
+
+        if (!IsInit)
+        {
+            m_fishCountText.text = SaveManager.Instance.m_saveState.Fish.ToString();
+            m_currentHatName.text = m_hats[SaveManager.Instance.m_saveState.CurrentHatIndex].m_itemName;
+            PopulateShop();
+            IsInit = true;
+        }
     }
 
     public override void Exit()
@@ -47,14 +49,38 @@ public class GameStateShop : GameState
             // ItemName
             _obj.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = m_hats[i].m_itemName;
             // Price
-            _obj.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = m_hats[i].m_itemPrice.ToString();
+            if (SaveManager.Instance.m_saveState.UnlockedHatFlag[i] == 0)
+                _obj.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = m_hats[i].m_itemPrice.ToString();
+            else
+                _obj.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "";
         }
     }
 
     void OnHatClick(int argIndex)
     {
-        m_currentHatName.text = m_hats[argIndex].m_itemName;
-        m_hatLogic.SelectHat(argIndex);
+        if (SaveManager.Instance.m_saveState.UnlockedHatFlag[argIndex] == 1)
+        {
+            SaveManager.Instance.m_saveState.CurrentHatIndex = argIndex;
+            m_currentHatName.text = m_hats[argIndex].m_itemName;
+            m_hatLogic.SelectHat(argIndex);
+            SaveManager.Instance.Save();
+        }
+        // 없는데 살 수 있는 경우
+        else if (m_hats[argIndex].m_itemPrice <= SaveManager.Instance.m_saveState.Fish)
+        {
+            SaveManager.Instance.m_saveState.Fish -= m_hats[argIndex].m_itemPrice;
+            SaveManager.Instance.m_saveState.UnlockedHatFlag[argIndex] = 1;
+            SaveManager.Instance.m_saveState.CurrentHatIndex = argIndex;
+            m_currentHatName.text = m_hats[argIndex].m_itemName;
+            m_hatLogic.SelectHat(argIndex);
+            m_fishCountText.text = SaveManager.Instance.m_saveState.Fish.ToString("");
+            SaveManager.Instance.Save();
+            m_hatContainer.GetChild(argIndex).transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "";
+        }
+        else // 못 사는 경우
+        {
+            Debug.Log("Not enough fish");
+        }
     }
 
     public void OnHomeClick()

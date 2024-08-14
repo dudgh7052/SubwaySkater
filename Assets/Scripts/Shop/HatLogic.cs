@@ -11,7 +11,7 @@ public class HatLogic : MonoBehaviour
     {
         m_hats = Resources.LoadAll<Hat>("Hat"); // 나중에 Addressable로 바꾸기
         SpawnHats();
-        SelectHat(1);
+        SelectHat(SaveManager.Instance.m_saveState.CurrentHatIndex);
     }
 
     void SpawnHats()

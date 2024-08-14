@@ -1,8 +1,9 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Advertisements;
 
-public class GameStateDeath : GameState
+public class GameStateDeath : GameState, IUnityAdsShowListener
 {
     public GameObject m_deathUI;
     [SerializeField] TextMeshProUGUI m_highscoreText;
@@ -22,7 +23,6 @@ public class GameStateDeath : GameState
 
         m_deathTime = Time.time;
         m_deathUI.SetActive(true);
-        m_completeionCircle.gameObject.SetActive(true);
 
         // 필요하면 최고 점수 저장
         if (SaveManager.Instance.m_saveState.Highscore < (int)GameStats.Instance.m_score)
@@ -59,6 +59,11 @@ public class GameStateDeath : GameState
         m_deathUI.SetActive(false);
     }
 
+    public void TryResumeGame()
+    {
+        AdManager.Instance.ShowRewardedAd(this);
+    }
+
     public void ResumeGame()
     {
         m_brain.ChangeState(GetComponent<GameStateGame>());
@@ -72,5 +77,40 @@ public class GameStateDeath : GameState
         GameManager.Instance.IsMotor.ResetPlayer();
         GameManager.Instance.IsWorldGeneration.ResetWorld();
         GameManager.Instance.IsSceneChunkGeneration.ResetWorld();
+    }
+
+    public void EnableRevive()
+    {
+        m_completeionCircle.gameObject.SetActive(true);
+    }
+
+    public void OnUnityAdsShowFailure(string placementId, UnityAdsShowError error, string message)
+    {
+        Debug.Log($"Unity Ads show failed. {message}");
+        ToMenu();
+    }
+
+    public void OnUnityAdsShowStart(string placementId)
+    {
+        Debug.Log("Unity Ads show started.");
+    }
+
+    public void OnUnityAdsShowClick(string placementId)
+    {
+
+    }
+
+    public void OnUnityAdsShowComplete(string placementId, UnityAdsShowCompletionState showCompletionState)
+    {
+        Debug.Log($"Unity Ads show completed. {showCompletionState}");
+        m_completeionCircle.gameObject.SetActive(false);
+        switch (showCompletionState)
+        {
+            case UnityAdsShowCompletionState.COMPLETED:
+                ResumeGame();
+                break;
+            default:
+                break;
+        }
     }
 }
