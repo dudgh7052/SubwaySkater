@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0fe47d4ccc289a248870e473e695f736, type: 3}
-  m_Name: Hat_2
+  m_Name: Hat_02
   m_EditorClassIdentifier: 
   m_itemName: Two
   m_itemPrice: 10
-  m_thumbnail: {fileID: 21300000, guid: 138e5fd66f68d724c9f7f436ba896b10, type: 3}
+  m_thumbnail: {fileID: 21300000, guid: 7cd7b8898662db648970105ea53d8cf0, type: 3}
   m_model: {fileID: 100000, guid: a41b2b28d2c370148b5fcb7cb91b34a4, type: 3}

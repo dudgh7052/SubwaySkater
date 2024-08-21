@@ -15,6 +15,11 @@ public class GameStateShop : GameState
     public GameObject m_hatPrefab;
     public Transform m_hatContainer;
     Hat[] m_hats;
+    int m_unlockedHatCount = 0;
+
+    // Completion Circle
+    public Image m_completionCircle;
+    public TextMeshProUGUI m_completionText;
 
     public override void Enter()
     {
@@ -29,6 +34,8 @@ public class GameStateShop : GameState
             PopulateShop();
             IsInit = true;
         }
+
+        ResetCompletionCircle();
     }
 
     public override void Exit()
@@ -52,7 +59,10 @@ public class GameStateShop : GameState
             if (SaveManager.Instance.m_saveState.UnlockedHatFlag[i] == 0)
                 _obj.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = m_hats[i].m_itemPrice.ToString();
             else
+            {
                 _obj.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "";
+                m_unlockedHatCount++;
+            }          
         }
     }
 
@@ -76,11 +86,22 @@ public class GameStateShop : GameState
             m_fishCountText.text = SaveManager.Instance.m_saveState.Fish.ToString("");
             SaveManager.Instance.Save();
             m_hatContainer.GetChild(argIndex).transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = "";
+            m_unlockedHatCount++;
+            ResetCompletionCircle();
         }
         else // 못 사는 경우
         {
             Debug.Log("Not enough fish");
         }
+    }
+
+    void ResetCompletionCircle()
+    {
+        int _hatCount = m_hats.Length - 1;
+        int _curUnlockedCount = m_unlockedHatCount - 1;
+
+        m_completionCircle.fillAmount = (float)_curUnlockedCount / (float)_hatCount;
+        m_completionText.text = _curUnlockedCount + "/" + _hatCount;
     }
 
     public void OnHomeClick()
